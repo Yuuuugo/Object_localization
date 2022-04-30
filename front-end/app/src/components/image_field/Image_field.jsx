@@ -1,12 +1,16 @@
-import React, { useState } from "react"
+import React, { useState,useRef } from "react"
 import './image_field.css'
 import texture from '../../assets/bg-texture.png'
 
 
 
-const Image_field = () => {
-    const [name, setName] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null);
+const Image_field = () => { 
+  const [img, setImg] = useState();
+
+  const onImageChange = (e) => {
+    const [file] = e.target.files;
+    setImg(URL.createObjectURL(file));
+  };
     return(
 
         <div id = "image">
@@ -18,13 +22,10 @@ const Image_field = () => {
         <img src = {texture} alt="texture" />
         <form>
         
-        
 
-        <input
-          type="file"
-          value={selectedFile}
-          onChange={(e) => setSelectedFile(e.target.files[0])}
-        />
+      <img src={img} alt="" />
+      <input type="file" onChange={onImageChange} />
+      
       </form>
       </div>
 
